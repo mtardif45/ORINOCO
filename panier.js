@@ -1,3 +1,5 @@
+let i = 0;
+
 // affichage du panier
 const displayCart = () => {
     let panier = JSON.parse(localStorage.getItem("panier")); // panier du localstorage
@@ -9,19 +11,42 @@ const displayCart = () => {
     for (let product of Object.values(panier)) {
         const cartItem = document.createElement('article');
         cartItem.innerHTML= `<div class="product-info">
-            <img class = "cartimg" src=${product.imageUrl}>
-            <p class ="product-name"> ${product.name}</p>
-            <p class ="product-price"> ${product.price / 100},00 €</p>
-            <p class="product-varnish"> ${product.varnish}</p>
-            <p class="product-quantity"> ${product.quantity}</p>
-            <p class="remove"> Supprimer </p>
+                <p><img class = "cartimg" src=${product.imageUrl}></p>
+                <p> ${product.name}</p>
+                <p> ${product.price / 100},00 €</p>
+                <p> ${product.varnish}</p>
+                <p> ${product.quantity}</p>
+                <p> ${product.quantity * product.price / 100},00 € </p>
+                <button id="deleteItemBtn" type= "button"> Supprimer </button>
             </div>`;
+        
         cartContainer.insertBefore(cartItem, totalCart);
         totalPrice += product.price * product.quantity; // calcul du prix total
-    }
-    
-    totalCart.textContent = `Total: ${totalPrice /100},00 € `; // affichage du prix total
-}
+   }
+   
+   totalCart.textContent = `Total: ${totalPrice /100},00 € `; // affichage du prix total*
+   
+   // ciblage du bouton supprimer dans le DOM
+   const deleteItemBtn = document.getElementById("deleteItemBtn");
+   // appel de la fonction évenement au click
+   deleteItemBtn.addEventListener ('click', deleteItem(i));
+
+    //Supprimer un produit du panier
+    deleteItem = (i) => {
+        let panier = JSON.parse(localStorage.getItem("panier")); // panier du localstorage
+        //recupérer le array
+        panier.splice(i, 1); 
+        //vide le localstorage
+        localStorage.clear();
+        // mettre à jour le localStorage avec le nouveau panier
+        localStorage.setItem('panier', JSON.stringify(panier));
+        //relancer la création de l'addition
+        window.location.reload();
+    };
+
+};
+
+
 
 displayCart();
   
