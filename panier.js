@@ -1,55 +1,61 @@
-let i = 0;
+const totalCart = document.getElementById("total-cart");
+
+const getCartFromLocalStorage = function () {
+    return JSON.parse(localStorage.getItem("panier"));
+}
 
 // affichage du panier
 const displayCart = () => {
-    let panier = JSON.parse(localStorage.getItem("panier")); // panier du localstorage
+    let panier = getCartFromLocalStorage(); // panier du localstorage
     const cartContainer = document.getElementById("cart-container");
-    const totalCart = document.getElementById("total-cart");
-    // variable stockant le prix total
-    let totalPrice = 0;
-
-    for (let product of Object.values(panier)) {
+    
+    // boucle FOR pour création des articles dans le panier
+    for (let [key, product] of Object.entries(panier)) {
         const cartItem = document.createElement('article');
-        cartItem.innerHTML= `<div class="product-info">
+        cartItem.innerHTML= `<div class="product-info" id="${key}">
                 <p><img class = "cartimg" src=${product.imageUrl}></p>
                 <p> ${product.name}</p>
                 <p> ${product.price / 100},00 €</p>
                 <p> ${product.varnish}</p>
                 <p> ${product.quantity}</p>
                 <p> ${product.quantity * product.price / 100},00 € </p>
-                <button id="deleteItemBtn" type= "button"> Supprimer </button>
+                <button class="deleteItemBtn" type="button" onclick="deleteCartItem('${key}')"> Supprimer </button>
             </div>`;
-        
+        // insertion du bloc article juste avant le bloc prix total
         cartContainer.insertBefore(cartItem, totalCart);
-        totalPrice += product.price * product.quantity; // calcul du prix total
    }
    
-   totalCart.textContent = `Total: ${totalPrice /100},00 € `; // affichage du prix total*
-   
-   // ciblage du bouton supprimer dans le DOM
-   const deleteItemBtn = document.getElementById("deleteItemBtn");
-   // appel de la fonction évenement au click
-   deleteItemBtn.addEventListener ('click', deleteItem(i));
-
-    //Supprimer un produit du panier
-    deleteItem = (i) => {
-        let panier = JSON.parse(localStorage.getItem("panier")); // panier du localstorage
-        //recupérer le array
-        panier.splice(i, 1); 
-        //vide le localstorage
-        localStorage.clear();
-        // mettre à jour le localStorage avec le nouveau panier
-        localStorage.setItem('panier', JSON.stringify(panier));
-        //relancer la création de l'addition
-        window.location.reload();
-    };
-
+   updateCartTotal();
 };
 
+const deleteCartItem = function (productId) {
+    let panier = getCartFromLocalStorage(); // panier du localstorage
+    delete panier[productId];
+    // mettre à jour le localStorage avec le nouveau panier
+    localStorage.setItem('panier', JSON.stringify(panier));
+    // Supprime le HTML pour le produit sélectionné
+    document.getElementById(productId).outerHTML = "";
 
+    updateCartTotal();    
+}
+
+const updateCartTotal = function () {
+    // variable stockant le prix total
+    let totalPrice = 0;
+
+    // panier du localstorage
+    let panier = getCartFromLocalStorage(); 
+
+    // boucle FOR pour création des articles dans le panier
+    for (let product of Object.values(panier)) {
+        totalPrice += product.price * product.quantity;
+    }
+
+    totalCart.textContent = `Total: ${totalPrice / 100} € `;
+}
 
 displayCart();
-  
+
 // ------------- début du formulaire ------------------
 window.addEventListener("DOMContentLoaded", (event) => {
     // ciblage des parties du formulaire html
@@ -70,11 +76,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const telError = document.getElementById("tel-error");
 
 // définition des regex 
-    const regexNumbers = /^[0-9]+$/;
-    const regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    const regexNumbers = /[0-9]/;
+    const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
     const specialCharacters = /[§!@#$%^&*().?":{}|<>]/;
 
-//  critère de validité
+//  critères de validité
     const noSpecialCharacters = (value) => !value.match(specialCharacters);
     const longEnough = (value) => value.length >= 2;
     const numbersOnly = (value) => value.match(regexNumbers) && longEnough(value);
@@ -131,5 +137,27 @@ window.addEventListener("DOMContentLoaded", (event) => {
        checkInputs();
     });
 
+    // construction du tableau pour envoi des données à l'API
+   let orderDetails = {
+       contact,
+       products,
+    };
+
+    let contact ={
+     firstname,
+     lastname,
+     address,
+     city,
+     tel,
+     email,
+    }
+
+    const api = 'http://localhost:3000/api/furniture/';
+
+    const postData = async () => {
+        const response = await fetch (api);
+    }
+
 });
+
 
