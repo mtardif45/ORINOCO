@@ -1,4 +1,14 @@
 const totalCart = document.getElementById("total-cart");
+const cartContainer = document.getElementById("cart-container");
+let form = document.getElementById("form-control");
+
+// variable stockant le prix total
+let totalPrice = 0;
+
+if (!localStorage.getItem("panier")) {
+    // vérifie que la localstorage est vide, si il est vide on cache le formulaire et on insère le texte
+    cartContainer.textContent = "Votre panier est vide.";
+};
 
 const getCartFromLocalStorage = function () {
     return JSON.parse(localStorage.getItem("panier"));
@@ -7,12 +17,11 @@ const getCartFromLocalStorage = function () {
 // affichage du panier
 const displayCart = () => {
     let panier = getCartFromLocalStorage(); // panier du localstorage
-    const cartContainer = document.getElementById("cart-container");
-    
+
     // boucle FOR pour création des articles dans le panier
     for (let [key, product] of Object.entries(panier)) {
         const cartItem = document.createElement('article');
-        cartItem.innerHTML= `<div class="product-info" id="${key}">
+        cartItem.innerHTML = `<div class="product-info" id="${key}">
                 <p><img class = "cartimg" src=${product.imageUrl}></p>
                 <p> ${product.name}</p>
                 <p> ${product.price / 100},00 €</p>
@@ -23,9 +32,9 @@ const displayCart = () => {
             </div>`;
         // insertion du bloc article juste avant le bloc prix total
         cartContainer.insertBefore(cartItem, totalCart);
-   }
-   
-   updateCartTotal();
+    }
+
+    updateCartTotal();
 };
 
 const deleteCartItem = function (productId) {
@@ -36,15 +45,13 @@ const deleteCartItem = function (productId) {
     // Supprime le HTML pour le produit sélectionné
     document.getElementById(productId).outerHTML = "";
 
-    updateCartTotal();    
-}
+    updateCartTotal();
+};
 
 const updateCartTotal = function () {
-    // variable stockant le prix total
-    let totalPrice = 0;
 
     // panier du localstorage
-    let panier = getCartFromLocalStorage(); 
+    let panier = getCartFromLocalStorage();
 
     // boucle FOR pour création des articles dans le panier
     for (let product of Object.values(panier)) {
@@ -52,112 +59,123 @@ const updateCartTotal = function () {
     }
 
     totalCart.textContent = `Total: ${totalPrice / 100} € `;
-}
+};
 
 displayCart();
 
 // ------------- début du formulaire ------------------
-window.addEventListener("DOMContentLoaded", (event) => {
+const checkInputs = () => {
+
     // ciblage des parties du formulaire html
-    const form = document.getElementById("form-control");
-    const firstname = document.getElementById("firstname");
-    const lastname = document.getElementById("lastname");
-    const address = document.getElementById("address");
-    const city = document.getElementById("city");
-    const email = document.getElementById("email");
-    const tel = document.getElementById("tel");
-    const validation = document.getElementById("button");
+    const firstname = document.getElementById("firstname").value;
+    const lastname = document.getElementById("lastname").value;
+    const address = document.getElementById("address").value;
+    const city = document.getElementById("city").value;
+    const email = document.getElementById("email").value;
+    // const validation = document.getElementById("button");
 
-    const firstnameError = document.getElementById("firstname-error");     
-    const lastnameError = document.getElementById("lastname-error");
-    const addressError = document.getElementById("address-error");
-    const cityError = document.getElementById("city-error");
-    const emailError = document.getElementById("email-error");
-    const telError = document.getElementById("tel-error");
-
-// définition des regex 
+    // définition des regex 
     const regexNumbers = /[0-9]/;
     const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
     const specialCharacters = /[§!@#$%^&*().?":{}|<>]/;
+    // variable contenant le message d'erreur 
+    let errorMessage = "";
+    let validForm = true;
 
-//  critères de validité
-    const noSpecialCharacters = (value) => !value.match(specialCharacters);
-    const longEnough = (value) => value.length >= 2;
-    const numbersOnly = (value) => value.match(regexNumbers) && longEnough(value);
-    const validTextInput = (value) => !value.match(regexNumbers) && noSpecialCharacters(value) && longEnough(value);
-    const validEmailInput = (value) => value.match(regexEmail) && longEnough(value);
-
-    validation.addEventListener("click", (e) => {
-        e.preventDefault();
-    // vérifie les saisies de l'utilisateur
-        checkInputs = () => {
-            // test du prénom 
-            if (validTextInput(firstname.value)) {
-                firstnameError.innerHTML = "";
-            }
-            else {
-                firstnameError.innerHTML = "Saisie invalide";
-            }
-            // test du nom
-            if (validTextInput(lastname.value)) {
-                lastnameError.innerHTML = "";
-            }
-            else {
-                lastnameError.innerHTML = "Saisie invalide"; 
-            }
-            //test de l'adresse
-            if (noSpecialCharacters(address.value) && longEnough(address.value)) {
-                addressError.innerHTML ="";
-            }
-            else {
-                addressError.innerHTML = "adresse invalide";
-            }
-            // test de la ville
-            if (noSpecialCharacters(city.value) && longEnough(city.value)) {
-                cityError.innerHTML ="";
-            }
-            else {
-                cityError.innerHTML = "Saisie invalide";
-            }
-            // test de l'email 
-            if (validEmailInput(email.value)) {
-                emailError.innerHTML = "";
-            }
-            else {
-                emailError.innerHTML = "email invalide";
-            }
-            // test du téléphone
-            if (numbersOnly(tel.value)) {
-                telError.innerHTML = "";
-            }
-            else {
-                telError.innerHTML = "veuillez saisir des chiffres uniquement"
-            }
-       };      
-       checkInputs();
-    });
-
-    // construction du tableau pour envoi des données à l'API
-   let orderDetails = {
-       contact,
-       products,
-    };
-
-    let contact ={
-     firstname,
-     lastname,
-     address,
-     city,
-     tel,
-     email,
+    // test du prénom 
+    if (regexNumbers.test(firstname) == true ||
+        specialCharacters.test(firstname) == true) {
+        validForm = false;
+        errorMessage = "Champ prénom invalide";
     }
 
-    const api = 'http://localhost:3000/api/furniture/';
-
-    const postData = async () => {
-        const response = await fetch (api);
+    // test du nom
+    if (regexNumbers.test(lastname) == true ||
+        specialCharacters.test(lastname) == true) {
+        validForm = false;
+        errorMessage = "Champ nom invalide";
     }
 
-});
+    //test de l'adresse
+    if (specialCharacters.test(address) == true) {
+        validForm = false;
+        errorMessage = "Champ adresse invalide";
+    }
+
+    // test de la ville
+    if (regexNumbers.test(city) == true ||
+        specialCharacters.test(city) == true) {
+        validForm = false;
+        errorMessage = "Champ ville invalide";
+    }
+
+    // test de l'email 
+    if (regexEmail.test(email) == false) {
+        validForm = false;
+        errorMessage = "champ Email invalide";
+    }
+
+    return validForm;
+};
+
+const placeOrder = async (e) => {
+    e.preventDefault();
+    console.log(checkInputs());
+    if (checkInputs()) {
+        // construction du tableau pour envoi des données à l'API
+        let contact = {
+            firstname: firstname,
+            lastname: lastname,
+            address: address,
+            city: city,
+            email: email
+        };
+
+        let products = Object.keys(getCartFromLocalStorage());
+        let orderData = {
+            contact: contact,
+            products: products
+        }
+        // route pour envoi des données à l'API
+        const url = 'http://localhost:3000/api/furniture/order';
+
+        fetch(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "http://localhost:3000",
+                'Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, X-Auth-Token'
+            },
+            credentials: 'include',
+            method: "POST",
+            body: JSON.stringify(orderData)
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
+
+        /*let response = await fetch(url, {
+            headers: {
+                "content-Type": "application/JSON",
+            },
+            method: "POST",
+            body: JSON.stringify(orderData)
+        });*/
+
+        //sessionStorage.setItem("order", response);
+        //localStorage.removeItem('panier');
+        //console.log(response.json())
+    }
+}
+
+form.onsubmit = placeOrder;
+
+//window.location = `confirmation.html?id=${response.order_id}&price=${totalPrice}&user=${firstName.value}`;
+
+
 
 

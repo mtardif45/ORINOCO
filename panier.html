@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,72 +14,70 @@
 <body>
   <header>
     <div>
-      <img class ="logo" src="./images/orinoco-logo.png" alt="logo orinoco">
+      <img class="logo" src="./images/orinoco-logo.png" alt="logo orinoco">
     </div>
     <h1><a href="./index.html">Orino-Furniture</a></h1>
     <nav class="nav-topbar"> <a href="./index.html"> Accueil</a>
-    <a href= "panier.html"><i class="fas fa-shopping-cart"></i></a>
+      <a href="panier.html"><i class="fas fa-shopping-cart"></i></a>
     </nav>
   </header>
+
   <main>
-  <h2> Détail de votre panier</h2>
-  <div id="cart-container">
-    <div class= "cart-header">
-      <h3></h3>
-      <h3> PRODUITS</h3>
-      <h3> PRIX</h3>
-      <h3> VERNIS </h3>
-      <h3> QUANTITE</h3>
-      <h3> Sous-total</h3>  
-    </div>      
-    
-    <div id="total-cart"></div>
-  </div>
 
-  <div class = "backToShop">
-    <button id="backToShop"> <a href = "index.html"> Continuer mes achats</a>
-    </button>    
-  </div>
-  
+    <h2> Détail de votre panier</h2>
+    <div id="cart-container">
+      <div class="cart-header">
+        <h3></h3>
+        <h3> PRODUITS</h3>
+        <h3> PRIX</h3>
+        <h3> VERNIS </h3>
+        <h3> QUANTITE</h3>
+        <h3> Sous-total</h3>
+      </div>
 
-  <div id="form-container">
-    <h2 class = "contact"> Vos coordonnées</h2>
-    <form method="POST" action="confirmation.html" name ="formulaire" id="form-control" >
-      <label for="firstname">Prénom: </label>
-      <p><input id="firstname" type= "text" name="firstname" placeholder="votre prénom" required/>
-        <span id = "firstname-error" class = "error-message"></span>
-      </p>      
+      <div id="total-cart"></div>
+    </div>
 
-      <label for="lastname"> Nom: </label>
-      <p><input id="lastname" type= "text" name="lastname" placeholder="votre nom"  required />
-        <span id = "lastname-error" class = "error-message"></span>
-      </p>
+    <div class="backToShop">
+      <button id="backToShop"> <a href="index.html"> Continuer mes achats</a>
+      </button>
+    </div>
 
-      <label for="address"> Adresse: </label>
-      <p><input id="address" type= "text" name="address" placeholder="n°, rue"  required />
-        <span id = "address-error" class = "error-message"></span>
-      </p>
 
-      <label for="city"> CP, Ville: </label>
-      <p><input id="city" type= "text" name="city" placeholder="CP et ville"  required />
-        <span id = "city-error" class = "error-message"></span>
-      </p>
+    <div id="form-container">
+      <h2 class="contact"> Vos coordonnées</h2>
+      <form name="formulaire" id="form-control">
+        <label for="firstname">Prénom: </label>
+        <p><input id="firstname" type="text" name="firstname" value="mimi" placeholder="votre prénom" required />
+          <span class="error-message"></span>
+        </p>
 
-      <label for="email">E-mail: </label>
-      <p><input id="email" type= "email" name="email" placeholder="mail@fournisseur.fr" required />
-        <span id = "email-error" class = "error-message"></span>
-      </p>
+        <label for="lastname"> Nom: </label>
+        <p><input id="lastname" type="text" name="lastname" value="mt" placeholder="votre nom" required />
+          <span class="error-message"></span>
+        </p>
 
-      <label for="tel"> Téléphone: </label>
-      <p><input id="tel" type= "tel" name="tel" placeholder="0102040506"  required/>
-        <span id = "tel-error" class = "error-message"></span>
-      </p>
+        <label for="address"> Adresse: </label>
+        <p><input id="address" type="text" name="address" value="rue pierre" placeholder="n°, rue" required />
+          <span class="error-message"></span>
+        </p>
 
-      <input type="submit" id="validation" value="Valider" />
-  </form>
-</div>
+        <label for="city"> Ville: </label>
+        <p><input id="city" type="text" name="city" value="orl" placeholder="ville" required />
+          <span class="error-message"></span>
+        </p>
 
-</main>
+        <label for="email">E-mail: </label>
+        <p><input id="email" type="email" name="email" value="mail@mail.fr" placeholder="mail@fournisseur.fr"
+            required />
+          <span class="error-message"></span>
+        </p>
+
+        <input type="submit" id="validation" value="Valider" />
+      </form>
+    </div>
+
+  </main>
 
   <footer>
     <nav class="nav">
@@ -90,5 +89,5 @@
 
   <script type="text/javascript" src="panier.js"></script>
 </body>
-</html>
 
+</html>
