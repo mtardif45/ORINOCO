@@ -5,6 +5,5 @@ const orderValidation = () => {
     document.getElementById("totalPrice").innerHTML = order.totalPrice;
     document.getElementById("orderId").innerHTML = order.orderId;
 
-    window.location = "index.html";
 };
 
