@@ -144,7 +144,7 @@ const placeOrder = async (e) => {
 
         // actualisation de la page dynamiquement et lien vers la page de confirmation
         window.location = `confirmation.html?id=${result.orderId}&price=${totalPrice}&user=${result.contact.firstName}`;
-        sessionStorage.setItem("order", JSON.stringify(res));
+        sessionStorage.setItem('order', JSON.stringify(result));
         localStorage.removeItem('panier');
 
         return result;
