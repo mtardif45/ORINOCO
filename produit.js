@@ -19,8 +19,8 @@ if (panier === null) {
     panier = {};
 }
 
-//récupérer un seul produit 
-const getOneFurniture = async (productApi,productId) => {
+//récupérer les données de l'API + de l'id pour afficher un seul produit 
+const getOneFurniture = async (productApi, productId) => {
     const response = await fetch(productApi + productId);
     return response.json();
 };
@@ -32,7 +32,6 @@ const displayOneProduct = async () => {
     customiseYourFurniture(article, furnitureData.varnish);
     // Une fois les données de l'API chargées, on réactive le bouton addToCart
     document.getElementById("addToCartBtn").removeAttribute("disabled");
-
     // Afficher le nombre de produits dans le panier
     cartIcon.textContent = getCartLength();
 };
@@ -42,7 +41,7 @@ const renderFurniture = (furniture) => {
     article.innerHTML = `<img alt="${furniture.name}" src="${furniture.imageUrl}">
     <p class ="productName"> ${furniture.name}</p>
     <p class="productDescription"> ${furniture.description}</p>
-    <p class ="productPrice"> ${furniture.price/100},00 €</p>
+    <p class ="productPrice"> ${furniture.price / 100},00 €</p>
     `;
     const product = document.getElementById("product");
     product.appendChild(article);
@@ -56,7 +55,7 @@ const customiseYourFurniture = async (parentElement, productVarnishes) => {
     label.setAttribute("for", "varnishes");
     select.id = "varnish-list";
     parentElement.appendChild(label).appendChild(select);
-
+    //définition de l'option par défaut en cas de non-sélection d'un vernis
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Sélectionnez un vernis";
@@ -93,9 +92,9 @@ const addToCart = () => {
         quantity: 1,
         varnish: varnishSelected,
     };
-    
+
     // Créer une clé unique pour chaque vernis différent
-    const key = furnitureData._id + "_" + varnishSelected.toLowerCase().replace(/ /g,"-"); // remplacer les espaces par un tiret
+    const key = furnitureData._id + "_" + varnishSelected.toLowerCase().replace(/ /g, "-"); // remplacer les espaces par un tiret
 
     // Si un produit similaire est déjà dans le panier
     if (panier[key] !== undefined) {
@@ -112,12 +111,12 @@ const addToCart = () => {
     else {
         panier[key] = furniture;
     };
-    
+
     // Mettre à jour le nombre de produits dans le panier
     cartIcon.textContent = getCartLength()
 
     // mettre à jour le panier local storage suite au click
-    localStorage.setItem("panier",JSON.stringify(panier));
+    localStorage.setItem("panier", JSON.stringify(panier));
     alert("ajouté au panier");
 };
 

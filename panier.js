@@ -25,7 +25,6 @@ const displayCart = () => {
     // boucle FOR pour création des articles dans le panier
     for (let [key, product] of Object.entries(panier)) {
         const cartItem = document.createElement('article');
-        const productId = product._id;
         cartItem.innerHTML = `<div class="product-info" id="${key}">
                 <p><img class = "cartimg" src=${product.imageUrl}></p>
                 <p> ${product.name}</p>
@@ -49,6 +48,7 @@ const deleteCartItem = function (productId) {
     // Supprime le HTML pour le produit sélectionné
     document.getElementById(productId).outerHTML = "";
     updateCartTotal();
+    window.location.reload(); //  rechargement de la page pour mise à jour prix total
 };
 
 const updateCartTotal = function () {
