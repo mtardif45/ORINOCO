@@ -75,37 +75,36 @@ const checkInputs = () => {
     const regexNumbers = /[0-9]/;
     const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
     const specialCharacters = /[§!@#$%^&*().?":{}|<>]/;
-    // variable contenant le message d'erreur 
-    let errorMessage = "";
+    // variable initialisant la validité du formulaire à un booléen true
     let validForm = true;
 
     // test du prénom 
     if (regexNumbers.test(firstName) == true ||
         specialCharacters.test(firstName) == true) {
         validForm = false;
-        errorMessage = "Champ prénom invalide";
+        alert("Prénom invalide. Veuillez saisir uniquement des lettres");
     }
     // test du nom
     if (regexNumbers.test(lastName) == true ||
         specialCharacters.test(lastName) == true) {
         validForm = false;
-        errorMessage = "Champ nom invalide";
+        alert("Nom invalide. Veuillez saisir uniquement des lettres.")
     }
     //test de l'adresse
     if (specialCharacters.test(address) == true) {
         validForm = false;
-        errorMessage = "Champ adresse invalide";
+        alert("Adresse invalide. Veuillez vérifier votre saisie.")
     }
     // test de la ville
     if (regexNumbers.test(city) == true ||
         specialCharacters.test(city) == true) {
         validForm = false;
-        errorMessage = "Champ ville invalide";
+        alert("Ville invalide. Veuillez saisir uniquement des lettres, sans caractères spéciaux.")
     }
     // test de l'email 
     if (regexEmail.test(email) == false) {
         validForm = false;
-        errorMessage = "champ Email invalide";
+        alert("Email invalide. Veuillez vérifier votre saisie.")
     }
     if (validForm) {
         return orderData.contact = {
@@ -120,6 +119,7 @@ const checkInputs = () => {
 
 const placeOrder = async (e) => {
     e.preventDefault();
+    checkInputs();
     if (checkInputs()) {
 
         let productsIds = [];
@@ -149,6 +149,7 @@ const placeOrder = async (e) => {
 
         return result;
     }
+
 };
 
 form.onsubmit = placeOrder;
