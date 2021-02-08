@@ -1,5 +1,10 @@
+html {
+    height: 100%;
+}
 body {
     width: 100%;
+    min-height: 100%;
+    position: relative;
 }
 /** en-tête avec intitulé du site + logo panier **/
 header {
@@ -91,6 +96,10 @@ footer {
     font-family: 'Finger Paint', cursive;
     font-size: 20px;
     margin-top: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 nav {
@@ -161,6 +170,27 @@ nav {
     margin: 0 auto;
     font-size: 18px;
     margin-top: 10px;
+}
+
+/** page confirmation **/ 
+#order-confirmation {
+    font-size: 18px;
+    text-align: center;
+    border: 2px dotted purple;
+    margin: 30px;
+}
+
+#totalPrice, #orderId, #firstName {
+    font-weight: bold;
+    color:rgb(124, 6, 126);
+}
+.retourAccueil {
+    color:rgb(124, 6, 126);
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: underline;
+    text-align: center;
+    padding-top: 30px;
 }
 
 /**formulaire **/ 
