@@ -1,3 +1,13 @@
+Orinoco, une entreprise de commerce en ligne souhaite se démarquer de ses concurrents en créant des applications thématiques ne vendant qu’un seul groupe de produits.
+
+Sur ce projet, il nous est demandé de créer un site de e-commerce comprenant 4 pages codées en Javascript: - une page d'accueil présentant les produits sous forme de liste, 
+- une page produit avec la possibilité de sélectionner une option dans un menu déroulant et l'ajouter au panier
+- une page panier avec un formulaire 
+-une page de confirmation avec le récap de la commande
+
+un plan de test est demandé. 
+
+
 # Orinoco #
 
 This is the back end server for Project 5 of the Junior Web Developer path.
