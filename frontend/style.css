@@ -1,0 +1,308 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/** en-tête avec intitulé du site + logo panier **/
+header {
+    width: 100%;
+    color: #241421;
+    background-color: #f3e9f1;
+    margin-top: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.logo {
+   margin-top: 20px;
+   width: 150px;
+}
+.nav-topbar {
+    font-size: 18px;
+    padding-top: 70px;
+}
+
+h1 {
+    font-size: 36px;
+    font-family: 'Finger Paint', cursive;
+    text-align: center;
+}
+/** icone panier **/
+.fas {
+    font-size: 26px;
+    color:#241421;
+    padding-left: 15px;
+}
+/** centre de la page **/
+h2 {
+    font-family: 'Finger Paint', cursive;
+    font-size: 28px;
+    text-align: center;
+}
+
+main {
+    min-height: 70%;
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+
+/** blocs de présentation des produits **/
+#products {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+article {
+    width: 40%;
+    margin: 15px;
+    border: 2px solid black;
+}
+
+img {
+    width: 250px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+/** bouton d'ajout au panier **/
+button {
+    background-color:rgb(172, 132, 173);
+    border: 1px #4e6096;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 25px 25px;
+    border-radius: 20px;
+}
+button:hover {
+    background-color:rgb(124, 6, 126);
+}    
+button:active {
+        position:relative;
+}
+/** pieds de page et les liens **/
+a {
+    text-decoration: none;
+    color:inherit;
+}
+
+footer {
+    color: #241421;
+    background-color: #f3e9f1;
+    font-family: 'Finger Paint', cursive;
+    font-size: 20px;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+    color: inherit;
+}
+
+/** PAGE PANIER **/
+#cart-container {
+    border-bottom: 4px solid #a467bd;
+}
+.cart-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 auto;
+    border-bottom: 4px solid #a467bd;
+}
+
+.product-title {
+    width: 45%;
+    text-align: center;
+}
+
+.price {
+    width: 15%;
+    text-align: center;
+}
+
+.quantity {
+    width: 30%;
+    text-align: center;
+}
+
+.total {
+    width: 10%;
+    text-align: center;
+}
+
+#cart-container article {
+    width: 100%;
+    justify-content: center;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cartimg {
+    width: 100px;
+    margin: 0;
+}
+
+#total-cart {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+    font-size: 18px;
+}
+
+#backToShop {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/** page confirmation **/ 
+#order-confirmation {
+    font-size: 18px;
+    text-align: center;
+    border: 2px dotted purple;
+    margin: 30px;
+}
+
+#totalPrice, #orderId, #firstName {
+    font-weight: bold;
+    color:rgb(124, 6, 126);
+}
+.retourAccueil {
+    color:rgb(124, 6, 126);
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: underline;
+    text-align: center;
+    padding-top: 30px;
+}
+
+/**formulaire **/ 
+* {
+    box-sizing: border-box;
+}
+#form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    font-family: 'open Sans', sans-serif;
+    background-color: rgb(243, 210, 171);
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin-top: 15px;
+    max-width: 80%;
+}
+
+.contact {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px 15px;
+    width: 100%;
+    margin-top: 0;
+}
+.form-control {
+    position: relative;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+#validation {
+    background-color: rgb(172, 132, 173);
+    border: 1px solid rgb(172, 132, 173);
+    width: 60%;
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-bottom: 5px;
+    margin: 0 auto;
+}
+
+.error-message  {
+    color: red;
+    font-weight: strong;
+}
+
+/** responsive tablettes **/ 
+@media all and (max-width: 768px) {
+    .fas {
+        font-size: 20px;
+    }
+    main {
+        width: 100%;
+    }
+    article {
+        width: 70%;
+        margin: auto;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    #addToCartBtn {
+        font-size: 10px;
+        display: block;
+        margin: auto;
+        margin-top: 5px;
+    }
+}
+
+/** responsive mobile ***/
+@media all and (max-width: 420px) {
+    body {
+        width: 100%;
+        margin: 0;
+    }
+    img {
+        width: 150px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .logo {
+        width: 80px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .nav-topbar {
+        padding-top: 0px;
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 12px;
+        }
+    .product-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+}
+

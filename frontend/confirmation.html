@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap" rel="stylesheet">
+
+  <title>Orinoco-Furniture Homepage</title>
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <img class="logo" src="../images/orinoco-logo.png" alt="logo orinoco">
+    </div>
+    <h1><a href="./index.html">Orino-Furniture</a></h1>
+    <nav class="nav-topbar"> <a href="./index.html"> Accueil</a>
+      <a href="panier.html"><i class="fas fa-shopping-cart"></i></a>
+    </nav>
+  </header>
+
+  <main>
+
+    <h2> Confirmation de commande</h2>
+    <div id="order-confirmation">
+      <p> Bonjour <span id="firstName"></span> , </p>
+      <p> Nous avons bien reçu votre commande d'un montant total de: </p>
+      <p id="totalPrice"> </p>
+      <p>Celle-ci est en cours de préparation.</p>
+      <p> Merci de bien vouloir noter la référence de votre commande: </p>
+      <p id="orderId"> </p>
+
+      <p class="signature"> L'équipe Orinoco-Furniture</p>
+
+    </div>
+
+    <div class="retourAccueil">
+      <a href="index.html">Retourner à l'accueil</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <nav class="nav">
+      <p class="nav_link"> <a href="./mentions.html" title="Mentions légales"> Mentions légales</a></p>
+      <p class="nav_link"> <a href="mailto:contact@orinoco.com" title="Contact"> Contactez-nous </a></p>
+    </nav>
+  </footer>
+
+  <script src="./js/confirmation.js"></script>
+
+</body>
